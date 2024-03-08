@@ -40,7 +40,6 @@ router.put('/update/:postId', async (req, res) => {
 
 router.get('/viewAll', async (req, res) => {
     try {
-        const { postId } = req.params;
         const post = await Post.find({ user: req.userId });
         if (!post) {
             return res.status(404).json({ message: 'Post not found or you are not authorized to view this post' });

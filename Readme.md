@@ -100,6 +100,52 @@ SECRET_KEY=<secret-key>
 - Request Parameters:
   - `postId`: ID of the post to be deleted.
 
+
+## Followers
+
+### Follow User
+- **Method**: POST
+- **Endpoint**: /follow/:userId
+- **Description**: Follow a user.
+- **Request Body**:
+  - None
+- **Response**: 
+  - 200: User followed successfully
+  - 400: Bad request
+  - 404: User not found
+  - 500: Internal server error
+
+### Unfollow User
+- **Method**: POST
+- **Endpoint**: /unfollow/:userId
+- **Description**: Unfollow a user.
+- **Request Body**:
+  - None
+- **Response**: 
+  - 200: User unfollowed successfully
+  - 400: Bad request
+  - 404: User not found
+  - 500: Internal server error
+
+### Get Followers
+- **Method**: GET
+- **Endpoint**: /followers
+- **Description**: Get the list of followers for the authenticated user.
+- **Response**: 
+  - 200: Followers retrieved successfully
+  - 401: Unauthorized
+  - 500: Internal server error
+
+### Get Following
+- **Method**: GET
+- **Endpoint**: /following
+- **Description**: Get the list of users followed by the authenticated user.
+- **Response**: 
+  - 200: Following retrieved successfully
+  - 401: Unauthorized
+  - 500: Internal server error
+
+---
 ## Environmental Variables
 
 - `PORT`: Port number for the server to listen on.
@@ -115,3 +161,16 @@ npm start
 ```
 
 2. Access the API using an API client such as Postman or curl.
+
+
+
+
+
+
+Certainly! Below is an example of a README file documenting the routes along with brief descriptions:
+
+---
+
+# API Documentation
+
+This document provides an overview of the routes available in the API.

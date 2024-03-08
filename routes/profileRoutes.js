@@ -10,9 +10,13 @@ router.post('/create', verifyToken, async (req, res) => {
         const { username, profilePicURL, bio } = req.body;
         // Check if the user already has a profile
         const existingProfile = await profileModel.findOne({ user: req.userId });
+        const exisitingUser = await userModel.findOne({ _id: req.userId });
+
         if (existingProfile) {
             return res.status(400).json({ message: 'Profile already exists for this user' });
         }
+        exisitingUser.username = username || existingProfile.username;
+
 
         const user = await userModel.findById(req.userId);
 
@@ -26,7 +30,7 @@ router.post('/create', verifyToken, async (req, res) => {
 
         // Save the new profile to the database
         await newProfile.save();
-
+        await exisitingUser.save();
         res.status(201).json({ message: 'Profile created successfully' });
     } catch (error) {
         console.error(error);
@@ -40,17 +44,20 @@ router.put('/update', verifyToken, async (req, res) => {
 
         // Check if the user has a profile
         const existingProfile = await profileModel.findOne({ user: req.userId });
+        const exisitingUser = await userModel.findOne({ _id: req.userId });
         if (!existingProfile) {
             return res.status(404).json({ message: 'Profile not found for this user' });
         }
 
         // Update the profile document
         existingProfile.username = username || existingProfile.username;
+        exisitingUser.username = username || existingProfile.username;
         existingProfile.profilePicURL = profilePicURL || existingProfile.profilePicURL;
         existingProfile.bio = bio || existingProfile.bio;
 
         // Save the updated profile to the database
         await existingProfile.save();
+        await exisitingUser.save();
 
         res.status(200).json({ message: 'Profile updated successfully', existingProfile });
     } catch (error) {

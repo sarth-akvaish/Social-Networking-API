@@ -5,6 +5,7 @@ import cors from 'cors';
 import userRoutes from './routes/userRoutes.js';
 import profileRoutes from './routes/profileRoutes.js';
 import authRoutes from './routes/authRoutes.js';
+import followerRoutes from './routes/followerRoutes.js';
 import postRoutes from './routes/postRoutes.js';
 import verifyToken from './middlewares/auth.js';
 
@@ -19,6 +20,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/profile', profileRoutes);
 app.use('/api/user/posts', verifyToken, postRoutes);
+app.use('/api/user/follow', verifyToken, followerRoutes);
 
 app.get('/', (req, res) => {
     res.send('Social Networking API');
