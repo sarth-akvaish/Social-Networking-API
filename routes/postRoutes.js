@@ -1,12 +1,19 @@
 import express from 'express'
 import Post from '../models/postModel.js';
+import { check, validationResult } from 'express-validator'
+
 
 const router = express.Router();
 
-router.post('/create', async (req, res) => {
+router.post('/create', [check("text", "text is required ").notEmpty()], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({
+            message: errors.array()
+        })
+    }
+    const { text } = req.body;
     try {
-        const { text } = req.body;
-        if (!text) return res.status(401).json({ message: 'Please provide some content' });
         const newPost = new Post({
             text,
             user: req.userId

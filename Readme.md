@@ -145,13 +145,6 @@ SECRET_KEY=<secret-key>
   - 401: Unauthorized
   - 500: Internal server error
 
----
-## Environmental Variables
-
-- `PORT`: Port number for the server to listen on.
-- `MONGODB_URI`: MongoDB connection URI.
-- `SECRET_KEY`: Secret key used for signing JWT tokens.
-
 ## Usage
 
 1. Run the server:
@@ -163,13 +156,6 @@ npm start
 2. Access the API using an API client such as Postman or curl.
 
 
-
-
-
-
-Certainly! Below is an example of a README file documenting the routes along with brief descriptions:
-
----
 
 # API Documentation
 
